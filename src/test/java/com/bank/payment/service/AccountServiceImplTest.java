@@ -55,29 +55,29 @@ class AccountServiceImplTest {
     @Test
     void createNewAccount() {
         AccountDTO accountDTO = new AccountDTO();
-        accountDTO.setName(NAME_2);
+        accountDTO.setNickName(NAME_2);
         Account account = getAccount2();
         given(accountRepository.save(any(Account.class))).willReturn(account);
         AccountDTO savedAccount = accountService.createNewAccount(accountDTO);
         then(accountRepository).should().save(any(Account.class));
-        assertThat(savedAccount.getName(),containsString(NAME_2));
+        assertThat(savedAccount.getNickName(),containsString(NAME_2));
     }
 
     @Test
     void saveAccountByDTO() {
         AccountDTO accountDTO = new AccountDTO();
-        accountDTO.setName(NAME_1);
+        accountDTO.setNickName(NAME_1);
         Account account = getAccount1();
         given(accountRepository.save(any(Account.class))).willReturn(account);
         AccountDTO savedAccount= accountService.saveAccountByDTO(ID_1,accountDTO);
         then(accountRepository).should().save(any(Account.class));
-        assertThat(savedAccount.getName(),containsString(NAME_1));
+        assertThat(savedAccount.getNickName(),containsString(NAME_1));
     }
 
     @Test
     void patchAccount() {
         AccountDTO accountDTO = new AccountDTO();
-        accountDTO.setName(NAME_1);
+        accountDTO.setNickName(NAME_1);
         Account account = getAccount1();
         given(accountRepository.findById(anyLong())).willReturn(Optional.of(account));
         given(accountRepository.save(any(Account.class))).willReturn(account);
@@ -96,14 +96,14 @@ class AccountServiceImplTest {
 
     private Account getAccount1() {
         Account account = new Account();
-        account.setName(NAME_1);
+        account.setNickName(NAME_1);
         account.setId(ID_1);
         return account;
     }
 
     private Account getAccount2() {
         Account account = new Account();
-        account.setName(NAME_2);
+        account.setNickName(NAME_2);
         account.setId(ID_2);
         return account;
     }
