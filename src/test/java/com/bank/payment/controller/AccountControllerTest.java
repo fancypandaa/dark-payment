@@ -67,8 +67,8 @@ class AccountControllerTest extends AbstractRestControllerTest{
         mockMvc.perform(get(AccountController.BASE_URL+"/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name",equalTo("Demo")))
-                .andExpect(jsonPath("$.address",equalTo("aa/bb/cc")));
+                .andExpect(jsonPath("$.nickName",equalTo("Demo")))
+                .andExpect(jsonPath("$.email",equalTo("aa/bb/cc")));
 
     }
 
@@ -88,8 +88,8 @@ class AccountControllerTest extends AbstractRestControllerTest{
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(accountDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name",equalTo("Demo")))
-                .andExpect(jsonPath("$.address",equalTo("aa/bb/cc")));
+                .andExpect(jsonPath("$.nickName",equalTo("Demo")))
+                .andExpect(jsonPath("$.email",equalTo("aa/bb/cc")));
     }
 
     @Test
@@ -105,8 +105,8 @@ class AccountControllerTest extends AbstractRestControllerTest{
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(accountDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name",equalTo("Demo")))
-                .andExpect(jsonPath("$.address",equalTo("aa/bb/cc")));
+                .andExpect(jsonPath("$.nickName",equalTo("Demo")))
+                .andExpect(jsonPath("$.email",equalTo("aa/bb/cc")));
     }
 
     @Test
@@ -125,8 +125,8 @@ class AccountControllerTest extends AbstractRestControllerTest{
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(accountDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name",equalTo("Demo")))
-                .andExpect(jsonPath("$.address",equalTo("aa/bb/cc")));
+                .andExpect(jsonPath("$.nickName",equalTo("Demo")))
+                .andExpect(jsonPath("$.email",equalTo("aa/bb/cc")));
     }
 
     @Test
