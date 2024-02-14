@@ -60,11 +60,11 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public AccountDTO patchAccount(Long id, AccountDTO accountDTO) {
         return accountRepository.findById(id).map(account -> {
-            if(accountDTO.getName() != null ){
-                account.setName(accountDTO.getName());
+            if(accountDTO.getNickName() != null ){
+                account.setNickName(accountDTO.getNickName());
             }
-            if(accountDTO.getAddress() != null){
-                account.setAddress(accountDTO.getAddress());
+            if(accountDTO.getEmail() != null){
+                account.setEmail(accountDTO.getEmail());
             }
            return saveAndReturnAccountDTO(account);
         }).orElseThrow(ResourceNotFoundException::new);
