@@ -12,21 +12,21 @@ class AccountMapperTest {
     private static final Long ID = 1L;
     private static final String NAME= "Test";
     private static final String PASSWORD="12345678";
-    private static final String PEN_CODE="1234";
-    private static final String ADDRESS="AAA-BBB-CCC-D";
-    private static final Integer PHONE_NO=123456789;
+    private static final String SECURITY_CODE ="1234";
+    private static final String EMAIL ="AAA-BBB-CCC-D";
+    private static final String REF_CODE ="123456789";
     AccountMapper accountMapper = AccountMapper.INSTANCE;
 
 
     @Test
     void accountToAccountDTO() {
         Account account = new Account();
-        account.setId(ID); account.setName(NAME);
-        account.setPassword(PASSWORD); account.setPenCode(PEN_CODE);
-        account.setAddress(ADDRESS); account.setPhoneNo(PHONE_NO);
+        account.setId(ID); account.setNickName(NAME);
+        account.setPassword(PASSWORD); account.setSecurityCode(SECURITY_CODE);
+        account.setEmail(EMAIL); account.setRef_Code(REF_CODE);
         AccountDTO accountDTO = accountMapper.accountToAccountDTO(account);
         assertEquals(Long.valueOf(ID),accountDTO.getId());
-        assertEquals(NAME,accountDTO.getName());
+        assertEquals(NAME,accountDTO.getNickName());
         assertNotNull(accountDTO);
 
     }
@@ -34,14 +34,14 @@ class AccountMapperTest {
     @Test
     void accountDtoToAccount() {
         AccountDTO accountDto = new AccountDTO();
-        accountDto.setId(ID); accountDto.setName(NAME);
-        accountDto.setPassword(PASSWORD); accountDto.setPenCode(PEN_CODE);
-        accountDto.setAddress(ADDRESS); accountDto.setPhoneNo(PHONE_NO);
+        accountDto.setId(ID); accountDto.setNickName(NAME);
+        accountDto.setPassword(PASSWORD); accountDto.setSecurityCode(SECURITY_CODE);
+        accountDto.setEmail(EMAIL); accountDto.setRef_Code(REF_CODE);
         Account account = accountMapper.accountDtoToAccount(accountDto);
         assertNotNull(account);
         assertEquals(Long.valueOf(ID),account.getId());
         assertEquals(PASSWORD,account.getPassword());
-        assertEquals(PEN_CODE,account.getPenCode());
-        assertEquals(PHONE_NO,account.getPhoneNo());
+        assertEquals(SECURITY_CODE,account.getSecurityCode());
+        assertEquals(REF_CODE,account.getRef_Code());
     }
 }
