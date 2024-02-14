@@ -14,13 +14,13 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false,unique = true)
-    private String name;
+    private String nickName;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private String penCode;
-    private String address;
-    private Integer phoneNo;
+    private String securityCode;
+    private String ref_Code;
+    private String email;
     @OneToMany(mappedBy = "account")
     private ArrayList<Balance> balanceList= new ArrayList<>();
     public Account setBalance(Balance balance){
@@ -28,4 +28,5 @@ public class Account {
         this.balanceList.add(balance);
         return this;
     }
+
 }
