@@ -42,13 +42,13 @@ class AccountControllerTest extends AbstractRestControllerTest{
     @Test
     void getAllAccounts() throws Exception{
         AccountDTO accountDTO = new AccountDTO();
-        accountDTO.setName("Demo");
-        accountDTO.setAddress("aa/bb/cc");
+        accountDTO.setNickName("Demo");
+        accountDTO.setEmail("aa/bb/cc");
         accountDTO.setPassword("111222333");
 
         AccountDTO accountDTO1 = new AccountDTO();
-        accountDTO1.setName("DemoI");
-        accountDTO1.setAddress("dd/ee/ff");
+        accountDTO1.setNickName("DemoI");
+        accountDTO1.setEmail("dd/ee/ff");
         accountDTO1.setPassword("444555666");
         AccountListDTO accountListDTO= new AccountListDTO(Arrays.asList(accountDTO,accountDTO1));
         when(accountService.getAllAccounts()).thenReturn(accountListDTO);
@@ -60,8 +60,8 @@ class AccountControllerTest extends AbstractRestControllerTest{
     @Test
     void getAccount() throws Exception{
         AccountDTO accountDTO= new AccountDTO();
-        accountDTO.setName("Demo");
-        accountDTO.setAddress("aa/bb/cc");
+        accountDTO.setNickName("Demo");
+        accountDTO.setEmail("aa/bb/cc");
         accountDTO.setPassword("111222333");
         when(accountService.getAccountsById(anyLong())).thenReturn(accountDTO);
         mockMvc.perform(get(AccountController.BASE_URL+"/1")
@@ -75,13 +75,13 @@ class AccountControllerTest extends AbstractRestControllerTest{
     @Test
     void postAccount() throws Exception{
         AccountDTO accountDTO= new AccountDTO();
-        accountDTO.setName("Demo");
-        accountDTO.setAddress("aa/bb/cc");
+        accountDTO.setNickName("Demo");
+        accountDTO.setEmail("aa/bb/cc");
         accountDTO.setPassword("111222333");
 
         AccountDTO returnedAccountDTO= new AccountDTO();
-        returnedAccountDTO.setName(accountDTO.getName());
-        returnedAccountDTO.setAddress(accountDTO.getAddress());
+        returnedAccountDTO.setNickName(accountDTO.getNickName());
+        returnedAccountDTO.setEmail(accountDTO.getEmail());
         returnedAccountDTO.setPassword(accountDTO.getPassword());
         when(accountService.createNewAccount(accountDTO)).thenReturn(returnedAccountDTO);
         mockMvc.perform(post(AccountController.BASE_URL)
@@ -95,11 +95,11 @@ class AccountControllerTest extends AbstractRestControllerTest{
     @Test
     void patchAccount() throws Exception{
         AccountDTO accountDTO= new AccountDTO();
-        accountDTO.setName("Demo");
+        accountDTO.setNickName("Demo");
 
         AccountDTO returnedAccountDTO= new AccountDTO();
-        returnedAccountDTO.setName(accountDTO.getName());
-        returnedAccountDTO.setAddress("aa/bb/cc");
+        returnedAccountDTO.setNickName(accountDTO.getNickName());
+        returnedAccountDTO.setEmail("aa/bb/cc");
         when(accountService.patchAccount(anyLong(),any(AccountDTO.class))).thenReturn(returnedAccountDTO);
         mockMvc.perform(patch(AccountController.BASE_URL+"/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -112,13 +112,13 @@ class AccountControllerTest extends AbstractRestControllerTest{
     @Test
     void updateAccount() throws Exception{
         AccountDTO accountDTO= new AccountDTO();
-        accountDTO.setName("Demo");
-        accountDTO.setAddress("aa/bb/cc");
+        accountDTO.setNickName("Demo");
+        accountDTO.setEmail("aa/bb/cc");
         accountDTO.setPassword("111222333");
 
         AccountDTO returnedAccountDTO= new AccountDTO();
-        returnedAccountDTO.setName(accountDTO.getName());
-        returnedAccountDTO.setAddress(accountDTO.getAddress());
+        returnedAccountDTO.setNickName(accountDTO.getNickName());
+        returnedAccountDTO.setEmail(accountDTO.getEmail());
         returnedAccountDTO.setPassword(accountDTO.getPassword());
         when(accountService.saveAccountByDTO(anyLong(),any(AccountDTO.class))).thenReturn(returnedAccountDTO);
         mockMvc.perform(put(AccountController.BASE_URL+"/1")
