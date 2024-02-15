@@ -18,7 +18,7 @@ public class Coins extends BalanceFactory {
     public BigDecimal getAvailableToUseAfterTax(BigDecimal amount) {
         Double afterTax = ((amount.doubleValue() *.25) * (0.25 * taxPercentage)) +
                 (amount.doubleValue() * 0.5 * (taxPercentage*0.5))+
-                (amount.doubleValue()  * (taxPercentage*0.25));
+                (amount.doubleValue()  *0.25* (taxPercentage*0.25));
         return amount.subtract(BigDecimal.valueOf(Math.ceil(afterTax)));
     }
     @Override
