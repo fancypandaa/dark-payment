@@ -14,9 +14,9 @@ public class LocalCurrency extends BalanceFactory {
     @Override
     public BigDecimal getAvailableToUseAfterTax(BigDecimal amount) {
 //        25% * (100% tax) + 50% * (50% tax) + 100% * (25% tax)
-        Double afterTax = (amount.doubleValue() * 0.25 * (taxPercentage)) +
+        Double afterTax = (amount.doubleValue() * 0.25 * (taxPercentage*0.15)) +
                 (amount.doubleValue() * 0.5 * (taxPercentage*0.5))+
-                (amount.doubleValue()  * (taxPercentage*0.25));
+                (amount.doubleValue() *0.25 * (taxPercentage*0.35));
         return amount.subtract(BigDecimal.valueOf(afterTax));
     }
     @Override
