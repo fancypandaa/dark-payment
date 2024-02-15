@@ -1,8 +1,10 @@
 package com.bank.payment.concurrencyFactory;
 
+import com.bank.payment.domain.BalanceTypes;
+
 public class BalanceOptions {
 
-    public BalanceFactory createBalance(String type,Double taxPercentage, String currencyEquivalent){
+    public BalanceFactory createBalance(String type,Double taxPercentage, BalanceTypes currencyEquivalent){
         BalanceFactory balanceFactory = null;
         if(type.equals("localCurrency")){
             balanceFactory = new LocalCurrency(taxPercentage,currencyEquivalent);

@@ -1,20 +1,17 @@
 package com.bank.payment.concurrencyFactory;
 
+import com.bank.payment.domain.BalanceTypes;
 import lombok.Getter;
 
 import java.math.BigDecimal;
 @Getter
 abstract public class BalanceFactory {
     Double taxPercentage;
-    String currencyEquivalent;
+    BalanceTypes currencyEquivalent;
 
-//    public BigDecimal getTotalAvailableToUse(){
-//        BigDecimal afterTax = BigDecimal.valueOf((amount.doubleValue() * taxPercentage));
-//        return amount.subtract(afterTax);
-//    }
     public abstract BigDecimal getAvailableToUseAfterTax(BigDecimal credit);
 
-    public abstract BigDecimal calculateCurrencyEquivalent(BigDecimal amount,String currency);
+    public abstract BigDecimal calculateCurrencyEquivalent(BigDecimal amount, BalanceTypes currency);
 
     @Override
     public String toString() {
