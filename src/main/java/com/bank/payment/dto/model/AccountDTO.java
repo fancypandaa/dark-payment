@@ -1,4 +1,4 @@
-package com.bank.payment.api.model;
+package com.bank.payment.dto.model;
 
 import com.bank.payment.domain.Balance;
 import lombok.Data;

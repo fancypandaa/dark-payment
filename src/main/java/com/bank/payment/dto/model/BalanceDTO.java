@@ -1,4 +1,4 @@
-package com.bank.payment.api.model;
+package com.bank.payment.dto.model;
 
 import com.bank.payment.domain.Account;
 import com.bank.payment.domain.BalanceLogs;
@@ -14,7 +14,6 @@ public class BalanceDTO {
     private double localBalance;
     private double foreignBalance;
     private Long totalCoins;
-    private double totalPoints;
     private String Balance_State;
     private ArrayList<BalanceLogs> balanceLog;
 }

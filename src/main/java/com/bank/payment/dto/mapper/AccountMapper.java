@@ -1,6 +1,6 @@
-package com.bank.payment.api.mapper;
+package com.bank.payment.dto.mapper;
 
-import com.bank.payment.api.model.AccountDTO;
+import com.bank.payment.dto.model.AccountDTO;
 import com.bank.payment.domain.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
