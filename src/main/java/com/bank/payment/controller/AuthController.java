@@ -1,6 +1,6 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.AuthDTO;
+import com.bank.payment.dto.model.AuthDTO;
 import com.bank.payment.domain.AuthUser;
 import com.bank.payment.service.AuthService;
 import org.slf4j.Logger;

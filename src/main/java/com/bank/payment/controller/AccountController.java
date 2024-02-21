@@ -1,7 +1,7 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.AccountDTO;
-import com.bank.payment.api.model.AccountListDTO;
+import com.bank.payment.dto.model.AccountDTO;
+import com.bank.payment.dto.model.AccountListDTO;
 import com.bank.payment.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.BalanceLogsDTO;
+import com.bank.payment.dto.model.BalanceLogsDTO;
 import com.bank.payment.service.BalanceLogsService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
