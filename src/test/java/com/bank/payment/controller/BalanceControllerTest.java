@@ -1,7 +1,6 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.BalanceDTO;
-import com.bank.payment.domain.Account;
+import com.bank.payment.dto.model.BalanceDTO;
 import com.bank.payment.domain.BalanceTypes;
 import com.bank.payment.service.BalanceService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static com.bank.payment.controller.AbstractRestControllerTest.asJsonString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -125,7 +123,7 @@ class BalanceControllerTest {
     private BalanceDTO getBalanceDTO2() {
         BalanceDTO balanceDTO = new BalanceDTO();
         balanceDTO.setBalance_State("Bad");
-        balanceDTO.setBalanceTypes(BalanceTypes.POINTS);
+        balanceDTO.setBalanceTypes(BalanceTypes.LOCAL_CURRENCY);
         return balanceDTO;
     }
 }

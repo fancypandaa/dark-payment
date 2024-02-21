@@ -1,7 +1,6 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.BalanceDTO;
-import com.bank.payment.api.model.BalanceLogsDTO;
+import com.bank.payment.dto.model.BalanceLogsDTO;
 import com.bank.payment.domain.Operations;
 import com.bank.payment.service.BalanceLogsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +20,6 @@ import java.util.*;
 
 import static com.bank.payment.controller.AbstractRestControllerTest.asJsonString;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -105,7 +103,7 @@ class BalanceLogsControllerTest {
     }
     private BalanceLogsDTO getBalanceLogsDTO1() {
         BalanceLogsDTO balanceLogsDTO = new BalanceLogsDTO();
-        balanceLogsDTO.setOperation(Operations.ADD_POINTS);
+        balanceLogsDTO.setOperation(Operations.ADD_COINS);
         balanceLogsDTO.setCreatedAt(new Date());
         return balanceLogsDTO;
     }

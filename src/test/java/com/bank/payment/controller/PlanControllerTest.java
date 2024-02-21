@@ -1,7 +1,6 @@
 package com.bank.payment.controller;
 
-import com.bank.payment.api.model.PlanDTO;
-import com.bank.payment.domain.Plan;
+import com.bank.payment.dto.model.PlanDTO;
 import com.bank.payment.service.PlanService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static com.bank.payment.controller.AbstractRestControllerTest.asJsonString;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.equalTo;
