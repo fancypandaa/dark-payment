@@ -22,8 +22,8 @@ public class Coins extends BalanceFactory {
         return amount.subtract(BigDecimal.valueOf(Math.ceil(afterTax)));
     }
     @Override
-    public BigDecimal calculateCurrencyEquivalent(BigDecimal amount, BalanceTypes currency) {
-        double equivalentAmount = amount.doubleValue() ;
-        return BigDecimal.valueOf(equivalentAmount);
+    public BigDecimal calculateInitialCurrencyEquivalent(BigDecimal amount, Double equivalentPrice, BalanceTypes currency) {
+        BigDecimal equivalentAmount = BigDecimal.valueOf(amount.doubleValue()* equivalentPrice);
+        return equivalentAmount;
     }
 }

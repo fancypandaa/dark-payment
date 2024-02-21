@@ -20,7 +20,7 @@ public class LocalCurrency extends BalanceFactory {
         return amount.subtract(BigDecimal.valueOf(afterTax));
     }
     @Override
-    public BigDecimal calculateCurrencyEquivalent(BigDecimal amount, BalanceTypes currency) {
+    public BigDecimal calculateInitialCurrencyEquivalent(BigDecimal amount, Double equivalentPrice, BalanceTypes currency) {
         return null;
     }
 

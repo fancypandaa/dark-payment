@@ -9,9 +9,9 @@ abstract public class BalanceFactory {
     Double taxPercentage;
     BalanceTypes currencyEquivalent;
 
-    public abstract BigDecimal getAvailableToUseAfterTax(BigDecimal credit);
+    public abstract BigDecimal getAvailableToUseAfterTax(BigDecimal amount);
 
-    public abstract BigDecimal calculateCurrencyEquivalent(BigDecimal amount, BalanceTypes currency);
+    public abstract BigDecimal calculateInitialCurrencyEquivalent(BigDecimal amount, Double equivalentPrice,BalanceTypes currency);
 
     @Override
     public String toString() {
