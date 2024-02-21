@@ -1,4 +1,4 @@
-package com.bank.payment.auctions;
+package com.bank.payment.auctions.subscriber;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
