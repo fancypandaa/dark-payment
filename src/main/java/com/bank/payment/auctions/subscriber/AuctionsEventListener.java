@@ -1,4 +1,4 @@
-package com.bank.payment.auctions;
+package com.bank.payment.auctions.subscriber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class AuctionsEventListener implements MessageListener {
         try {
             AuctionModel auctionModel =objectMapper.readValue(message.getBody(),AuctionModel.class);
             redisTemplate.opsForValue().set(auctionModel.getAuctionId(),auctionModel);
-            System.out.println(message.getBody()+"  "+message.getChannel());
+            System.out.println("Message received: " + message.toString());
         }
         catch (IOException ex){
             ex.printStackTrace();
