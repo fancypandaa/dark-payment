@@ -1,8 +1,8 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.mapper.BalanceLogsMapper;
-import com.bank.payment.api.model.BalanceLogsDTO;
-import com.bank.payment.api.model.BalanceLogsListDTO;
+import com.bank.payment.dto.mapper.BalanceLogsMapper;
+import com.bank.payment.dto.model.BalanceLogsDTO;
+import com.bank.payment.dto.model.BalanceLogsListDTO;
 import com.bank.payment.domain.BalanceLogs;
 import com.bank.payment.repositories.BalanceLogsRepository;
 import org.slf4j.Logger;

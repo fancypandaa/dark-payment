@@ -1,7 +1,7 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.mapper.BalanceMapper;
-import com.bank.payment.api.model.BalanceDTO;
+import com.bank.payment.dto.mapper.BalanceMapper;
+import com.bank.payment.dto.model.BalanceDTO;
 import com.bank.payment.domain.Balance;
 import com.bank.payment.repositories.BalanceRepository;
 import org.slf4j.Logger;
@@ -57,9 +57,6 @@ public class BalanceServiceImpl implements BalanceService{
         Balance balance= optionalBalance.get();
         if(balance.getTotalCoins() != balanceDTO.getTotalCoins()){
             balance.setTotalCoins(balanceDTO.getTotalCoins());
-        }
-        if(balance.getTotalPoints() != balanceDTO.getTotalPoints()){
-            balance.setTotalPoints(balanceDTO.getTotalPoints());
         }
         if(balance.getLocalBalance() != balanceDTO.getLocalBalance()){
             balance.setLocalBalance(balanceDTO.getLocalBalance());

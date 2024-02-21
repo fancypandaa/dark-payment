@@ -1,6 +1,6 @@
 package com.bank.payment.service;
-import com.bank.payment.api.model.AccountDTO;
-import com.bank.payment.api.model.AccountListDTO;
+import com.bank.payment.dto.model.AccountDTO;
+import com.bank.payment.dto.model.AccountListDTO;
 
 
 public interface AccountService {

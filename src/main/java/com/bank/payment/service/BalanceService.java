@@ -1,7 +1,7 @@
 package com.bank.payment.service;
 
 
-import com.bank.payment.api.model.BalanceDTO;
+import com.bank.payment.dto.model.BalanceDTO;
 import java.util.*;
 public interface BalanceService {
     BalanceDTO findBalanceById(Long id);

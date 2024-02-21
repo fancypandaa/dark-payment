@@ -1,6 +1,6 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.model.PlanDTO;
+import com.bank.payment.dto.model.PlanDTO;
 
 public interface PlanService {
     PlanDTO getPlansById(Long id);

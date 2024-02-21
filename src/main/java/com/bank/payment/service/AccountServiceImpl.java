@@ -1,8 +1,8 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.mapper.AccountMapper;
-import com.bank.payment.api.model.AccountDTO;
-import com.bank.payment.api.model.AccountListDTO;
+import com.bank.payment.dto.mapper.AccountMapper;
+import com.bank.payment.dto.model.AccountDTO;
+import com.bank.payment.dto.model.AccountListDTO;
 import com.bank.payment.domain.Account;
 import com.bank.payment.repositories.AccountRepository;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.model.BalanceLogsDTO;
-import com.bank.payment.api.model.BalanceLogsListDTO;
+import com.bank.payment.dto.model.BalanceLogsDTO;
+import com.bank.payment.dto.model.BalanceLogsListDTO;
 import org.springframework.data.domain.Page;
 import java.util.*;
 public interface BalanceLogsService {
