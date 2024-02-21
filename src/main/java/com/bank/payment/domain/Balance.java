@@ -16,7 +16,6 @@ public class Balance {
     private double localBalance;
     private double foreignBalance;
     private Long totalCoins;
-    private double totalPoints;
     private String Balance_State;
     @OneToOne
     Plan plan;
