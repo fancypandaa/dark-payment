@@ -1,9 +1,9 @@
 package com.bank.payment.auctions;
 
+import com.bank.payment.auctions.subscriber.AuctionModel;
+import com.bank.payment.auctions.subscriber.AuctionsEventListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redis.testcontainers.RedisContainer;
-import net.bytebuddy.utility.dispatcher.JavaDispatcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
@@ -31,13 +31,14 @@ class AuctionsEventListenerTest {
     AuctionsEventListener eventListener;
     @Autowired
     ObjectMapper objectMapper;
+
     @Container
-    static RedisContainer REDIS_CONTAINER =
-            new RedisContainer(DockerImageName.parse("myredis")).withExposedPorts(6379);
+    private static final RedisContainer REDIS_CONTAINER =
+            new RedisContainer(DockerImageName.parse("redis")).withExposedPorts(6379);
     @DynamicPropertySource
-     static void registerRedisProperties(DynamicPropertyRegistry registry){
-        registry.add("spring.data.redis.host",REDIS_CONTAINER::getHost);
-        registry.add("spring.data.redis.port",()->REDIS_CONTAINER.getMappedPort(6379).toString());
+    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.redis.host", REDIS_CONTAINER::getHost);
+        registry.add("spring.redis.port", () -> REDIS_CONTAINER.getMappedPort(6379).toString());
     }
 
     @Test
