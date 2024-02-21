@@ -1,6 +1,7 @@
 package com.bank.payment.api.mapper;
 
-import com.bank.payment.api.model.BalanceLogsDTO;
+import com.bank.payment.dto.mapper.BalanceLogsMapper;
+import com.bank.payment.dto.model.BalanceLogsDTO;
 import com.bank.payment.domain.BalanceLogs;
 import com.bank.payment.domain.Operations;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceLogsMapperTest {
     private static final UUID ID= new UUID(99,1000);
-    private static final Operations OPE=Operations.ADD_POINTS;
+    private static final Operations OPE=Operations.ADD_COINS;
     private static final Boolean STATUS=Boolean.TRUE;
     private static final Date CREATED_AT= new Date();
     private static final Date UPDATED_AT=new Date();

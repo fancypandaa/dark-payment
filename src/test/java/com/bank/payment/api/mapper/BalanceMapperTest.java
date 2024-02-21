@@ -1,14 +1,9 @@
 package com.bank.payment.api.mapper;
 
-import com.bank.payment.api.model.BalanceDTO;
+import com.bank.payment.dto.mapper.BalanceMapper;
+import com.bank.payment.dto.model.BalanceDTO;
 import com.bank.payment.domain.*;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +23,6 @@ class BalanceMapperTest {
         balance.setBalanceTypes(BALANCE_TYPES);
         balance.setLocalBalance(CURRENT_BALANCE);
         balance.setTotalCoins(TOTAL_COINS);
-        balance.setTotalPoints(TOTAL_POINTS);
         balance.setBalance_State(BALANCE_STATE);
         BalanceDTO balanceDTO = balanceMapper.balanceToBalanceDTO(balance);
         assertNotNull(balanceDTO);
@@ -43,7 +37,6 @@ class BalanceMapperTest {
         balanceDto.setBalanceTypes(BALANCE_TYPES);
         balanceDto.setLocalBalance(CURRENT_BALANCE);
         balanceDto.setTotalCoins(TOTAL_COINS);
-        balanceDto.setTotalPoints(TOTAL_POINTS);
         Balance balance = balanceMapper.balanceDtoToBalance(balanceDto);
         assertNotNull(balance);
         assertEquals(ID,balance.getId());

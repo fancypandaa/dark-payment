@@ -1,9 +1,9 @@
 package com.bank.payment.api.mapper;
 
-import com.bank.payment.api.model.PlanDTO;
+import com.bank.payment.dto.mapper.PlanMapper;
+import com.bank.payment.dto.model.PlanDTO;
 import com.bank.payment.domain.BalanceTypes;
 import com.bank.payment.domain.Plan;
-import jakarta.persistence.Enumerated;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ class PlanMapperTest {
     private static final String NAME="PLAN-A";
     private static final Long MINIMUM=1000L;
     private static final Long MAXIMUM=50000L;
-    private static final BalanceTypes TYPE=BalanceTypes.POINTS;
+    private static final BalanceTypes TYPE=BalanceTypes.BLOCK_CHAIN;
     private static final double INTEREST= .05;
     private static final double FEES= 0.2;
     PlanMapper planMapper = PlanMapper.INSTANCE;
