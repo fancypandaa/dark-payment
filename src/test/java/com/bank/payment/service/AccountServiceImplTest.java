@@ -1,14 +1,14 @@
 package com.bank.payment.service;
 
-import com.bank.payment.api.mapper.AccountMapper;
+import com.bank.payment.dto.mapper.AccountMapper;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.then;
 
-import com.bank.payment.api.model.AccountDTO;
-import com.bank.payment.api.model.AccountListDTO;
+import com.bank.payment.dto.model.AccountDTO;
+import com.bank.payment.dto.model.AccountListDTO;
 import com.bank.payment.domain.Account;
 import com.bank.payment.repositories.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;

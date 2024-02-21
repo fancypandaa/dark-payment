@@ -1,12 +1,11 @@
 package com.bank.payment.service;
 
-import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.then;
 
-import com.bank.payment.api.mapper.PlanMapper;
-import com.bank.payment.api.model.PlanDTO;
+import com.bank.payment.dto.mapper.PlanMapper;
+import com.bank.payment.dto.model.PlanDTO;
 import com.bank.payment.domain.Plan;
 import com.bank.payment.repositories.PlanRepository;
 import org.junit.jupiter.api.BeforeEach;
