@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.*;
 @RestController
 @RequestMapping(AuctionController.BASE_URL)
 public class AuctionController {
@@ -18,6 +18,7 @@ public class AuctionController {
 
     @PostMapping("/publish")
     public String publish(@RequestBody AuctionModel auctionModel){
+        auctionModel.setCreatedAt(new Date().toLocaleString());
         auctionService.publish(auctionModel);
         return "Success";
     }
