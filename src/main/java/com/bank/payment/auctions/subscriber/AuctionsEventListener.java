@@ -33,12 +33,4 @@ public class AuctionsEventListener implements MessageListener {
             ex.printStackTrace();
         }
     }
-    public void soldOut(AuctionModel auction){
-        try {
-            ll.removeFirstOccurrence(auction);
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
-    }
 }
