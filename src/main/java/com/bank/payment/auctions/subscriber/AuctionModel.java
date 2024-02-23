@@ -17,5 +17,5 @@ public class AuctionModel implements Serializable {
     private Long currentAmount;
     private String currencyType;
     private String currencyTo;
-    private Date createdAt;
+    private String createdAt;
 }
