@@ -19,13 +19,14 @@ public class AuctionsEventListener implements MessageListener {
     private RedisTemplate<String,Object> redisTemplate;
 
     private LinkedList<AuctionModel> ll= new LinkedList();
-
+    @Autowired
+    AuctionBuilder auctionBuilder;
     @Override
     public void onMessage(Message message, byte[] pattern) {
         try {
             AuctionModel auctionModel =objectMapper.readValue(message.getBody(),AuctionModel.class);
             redisTemplate.opsForValue().set(auctionModel.getAuctionId(),auctionModel);
-
+            auctionBuilder.createAuction(auctionModel);
             System.out.println("Message received: " + auctionModel.getCurrentAmount()+ " " + auctionModel.getCurrencyType()
             +" ->> "+ auctionModel.getCurrencyTo()+ " "+ auctionModel.getCreatedAt());
         }

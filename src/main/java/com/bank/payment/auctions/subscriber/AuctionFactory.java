@@ -16,6 +16,7 @@ public class AuctionFactory {
         }
         return result;
     }
+
     public static void removeAuction(String auctionId){
         AuctionForm auctionForm = auctionList.get(auctionId);
         if(auctionForm!=null) {
