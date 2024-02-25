@@ -10,15 +10,15 @@ import com.bank.payment.domain.BalanceTypes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.data.redis.connection.DefaultMessage;
-import org.springframework.data.redis.connection.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyConfigProperties.class)
 public class PaymentApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PaymentApplication.class, args);
 

@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.*;
 @RestController
 @RequestMapping(AuctionController.BASE_URL)
 public class AuctionController {
     public static final String BASE_URL = "/api/auction";
-
-    @Autowired
-    private AuctionService auctionService;
+    LinkedList<AuctionModel> ll= new LinkedList<>();
     @Autowired
     AuctionBuilder auctionBuilder;
+    @Autowired
+    private AuctionService auctionService;
 
     @PostMapping("/publish")
     public ResponseEntity<String> publish(@RequestBody AuctionModel auctionModel){
@@ -27,9 +26,9 @@ public class AuctionController {
     }
     @PostMapping("/makeOffer")
     public ResponseEntity<String> submitOffer(
-            @RequestParam String auctionId,
-            @RequestParam String voterId,
-            @RequestParam BigDecimal offer
+            @RequestParam("auctionId") String auctionId,
+            @RequestParam("voterId") String voterId,
+            @RequestParam("offer") BigDecimal offer
     ){
         try {
             auctionBuilder.addVote(auctionId,voterId,offer);

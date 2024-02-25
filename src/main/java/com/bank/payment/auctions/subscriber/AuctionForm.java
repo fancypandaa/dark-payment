@@ -11,10 +11,13 @@ import java.util.*;
 public class AuctionForm {
     private String auctionId;
     private String state;
-    private Integer voted;
-    private Double cost;
+    private int voted;
+    private double cost;
     private Date openAt;
     private Date closeAt;
     private HashMap<String, BigDecimal> buyers= new HashMap<>();
-
+    public AuctionForm addBuyers(String voterId, BigDecimal offer){
+        this.buyers.put(voterId,offer);
+        return this;
+    }
 }

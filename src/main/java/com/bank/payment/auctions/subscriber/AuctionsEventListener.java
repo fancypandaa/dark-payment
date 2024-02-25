@@ -18,7 +18,6 @@ public class AuctionsEventListener implements MessageListener {
     @Qualifier("pub_subRedisTemplate")
     private RedisTemplate<String,Object> redisTemplate;
 
-    private LinkedList<AuctionModel> ll= new LinkedList();
     @Autowired
     AuctionBuilder auctionBuilder;
     @Override
