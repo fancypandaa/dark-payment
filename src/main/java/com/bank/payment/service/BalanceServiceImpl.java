@@ -53,6 +53,7 @@ public class BalanceServiceImpl implements BalanceService{
     @Override
     public BalanceDTO patchBalance(Long id, BalanceDTO balanceDTO) {
         Optional<Balance> optionalBalance = balanceRepository.findById(id);
+        log.warn("patchBalance ",id,balanceDTO.getId());
         if(!optionalBalance.isPresent()) return null;
         Balance balance= optionalBalance.get();
         if(balance.getTotalCoins() != balanceDTO.getTotalCoins()){

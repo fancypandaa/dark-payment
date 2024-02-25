@@ -18,10 +18,10 @@ import java.math.BigDecimal;
 @SpringBootApplication
 @EnableConfigurationProperties(RsaKeyConfigProperties.class)
 public class PaymentApplication {
-	
+	private static final Logger logger= LoggerFactory.getLogger(PaymentApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(PaymentApplication.class, args);
-
+		logger.info("Dark Money Server on the fire.....");
 		BalanceOptions balanceOptions= new BalanceOptions();
 		BalanceFactory balanceFactory=balanceOptions.createBalance("localCurrency",0.17, BalanceTypes.FOREIGN_CURRENCY);
 		System.out.println(balanceFactory.getAvailableToUseAfterTax(BigDecimal.valueOf(5000)));

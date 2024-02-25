@@ -43,6 +43,7 @@ public class PlanServiceImpl implements PlanService{
 
     @Override
     public PlanDTO patchAccount(Long id, PlanDTO planDTO) {
+        log.warn("patch account ",id,planDTO.getId());
         return planRepository.findById(id)
                 .map(plan -> {
                     if(planDTO.getFees() != plan.getFees()){

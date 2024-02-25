@@ -27,7 +27,6 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AccountListDTO getAllAccounts() {
-
         List<AccountDTO> accountDTOS= accountRepository.findAll()
                 .stream().map(account -> {
                     AccountDTO accountDTO = accountMapper.accountToAccountDTO(account);
@@ -42,6 +41,7 @@ public class AccountServiceImpl implements AccountService{
                 .map(accountMapper::accountToAccountDTO).orElseThrow(ResourceNotFoundException::new);
     }
     private AccountDTO saveAndReturnAccountDTO(Account account){
+        log.info(account.getNickName()+" "+account.getId());
         Account newAccount = accountRepository.save(account);
         return accountMapper.accountToAccountDTO(newAccount);
     }
@@ -52,6 +52,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AccountDTO saveAccountByDTO(Long id, AccountDTO accountDTO) {
+        log.info("save account "+ id);
         Account account = accountMapper.accountDtoToAccount(accountDTO);
         account.setId(id);
         return saveAndReturnAccountDTO(account);

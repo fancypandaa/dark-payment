@@ -1,7 +1,6 @@
 package com.bank.payment.service;
 
 import com.bank.payment.repositories.UserRepository;
-import com.nimbusds.jwt.JWTClaimsSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ public class AuthServiceImpl implements AuthService  {
     private UserRepository userRepository;
     @Override
     public String generateToken(Authentication authentication) {
+
         Instant now= Instant.now();
         String scope = authentication.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority)
@@ -39,6 +39,7 @@ public class AuthServiceImpl implements AuthService  {
                 .subject(authentication.getName())
                 .claim("scope",scope)
                 .build();
+        log.warn("Auth token successfully created... ");
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

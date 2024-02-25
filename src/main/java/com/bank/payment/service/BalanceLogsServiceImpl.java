@@ -34,6 +34,7 @@ public class BalanceLogsServiceImpl implements BalanceLogsService{
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), balanceLogsDTOList.size());
         List<BalanceLogsDTO> balanceLogsDTOList1 = balanceLogsDTOList.subList(start,end);
+        log.info("list balance logs by pagination "+page+" + page, size "+size);
         return new PageImpl<>(balanceLogsDTOList1,pageable,balanceLogsDTOList1.size());
     }
 
@@ -55,6 +56,7 @@ public class BalanceLogsServiceImpl implements BalanceLogsService{
     }
     @Override
     public BalanceLogsDTO createBalanceLogs(BalanceLogsDTO balanceLogsDTO) {
+        log.info("create new Balance logs ",balanceLogsDTO.getId());
         return saveAndReturnBalanceLogsDTO(balanceLogsMapper.balanceLogsDtoToBalanceLogs(balanceLogsDTO));
     }
 

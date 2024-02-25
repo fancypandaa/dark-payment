@@ -1,7 +1,10 @@
 package com.bank.payment.service;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class ResourceNotFoundException extends RuntimeException{
+    private static final Logger log = LoggerFactory.getLogger(ResourceNotFoundException.class);
     public ResourceNotFoundException() {
+        log.warn("Error interfaces ......");
     }
 
     public ResourceNotFoundException(String message) {
