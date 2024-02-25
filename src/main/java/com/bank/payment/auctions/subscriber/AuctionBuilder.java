@@ -1,19 +1,19 @@
 package com.bank.payment.auctions.subscriber;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public abstract class AuctionBuilder {
-    LinkedList<AuctionModel> ll;
-
-    public AuctionBuilder(LinkedList<AuctionModel> ll) {
-        this.ll = ll;
-    }
+@Component
+public class AuctionBuilder {
+    private static LinkedList<AuctionModel> ll= new LinkedList();
 
     public void createAuction(AuctionModel auctionModel){
-        this.ll.add(auctionModel);
+        ll.add(auctionModel);
         AuctionFactory.getAuction(auctionModel);
+        System.out.println("List Size: "+ll.size());
+
     }
     private AuctionModel findInList(String auctionId){
         for(int i=0;i<ll.size();i++){
@@ -38,6 +38,7 @@ public abstract class AuctionBuilder {
         AuctionFactory.extendAuction(auctionId);
      }
     public void addVote(String auctionId,String voterId, BigDecimal offer){
+        System.out.println("addVote "+auctionId+" "+voterId+" ");
         AuctionFactory.addVote(auctionId,voterId,offer);
      }
 
