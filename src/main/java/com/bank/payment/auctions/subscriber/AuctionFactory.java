@@ -4,8 +4,11 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Component
 public class AuctionFactory {
+    private static final Logger logger= LoggerFactory.getLogger(AuctionFactory.class);
     private static Map<String, AuctionForm> auctionList = new HashMap<>();
     public static AuctionForm getAuction(AuctionModel auctionModel){
         Optional<AuctionForm> result=Optional.ofNullable(auctionList.get(auctionModel.getAuctionId()));
@@ -19,7 +22,8 @@ public class AuctionFactory {
             result= Optional.of(auctionForm);
 
         }
-        System.out.println("MAP SIZE:: "+ auctionList.size() +" "+result.toString());
+        logger.info("MAP SIZE::",auctionList.size());
+        logger.info(result.toString());
         return result.get();
     }
 
@@ -39,8 +43,7 @@ public class AuctionFactory {
         AuctionForm auctionForm = auctionList.get(auctionId);
         auctionForm.setVoted(auctionForm.getVoted()+1);
         auctionForm.addBuyers(voterId,offer);
-        System.out.println("xxxx");
-        System.out.println(auctionForm.getBuyers().get(voterId)+" <<<<<<<<");
+        logger.info("increment votes ",auctionForm.getBuyers().get(voterId));
     }
     public static BigDecimal closeAuction(String auctionId,String voterId){
         AuctionForm auctionForm = auctionList.get(auctionId);

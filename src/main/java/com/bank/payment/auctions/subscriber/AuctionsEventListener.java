@@ -9,9 +9,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.io.IOException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @Service
 public class AuctionsEventListener implements MessageListener {
+    private static final Logger log= LoggerFactory.getLogger(AuctionsEventListener.class);
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -26,7 +28,7 @@ public class AuctionsEventListener implements MessageListener {
             AuctionModel auctionModel =objectMapper.readValue(message.getBody(),AuctionModel.class);
             redisTemplate.opsForValue().set(auctionModel.getAuctionId(),auctionModel);
             auctionBuilder.createAuction(auctionModel);
-            System.out.println("Message received: " + auctionModel.getCurrentAmount()+ " " + auctionModel.getCurrencyType()
+            log.info("Message received: " + auctionModel.getCurrentAmount()+ " " + auctionModel.getCurrencyType()
             +" ->> "+ auctionModel.getCurrencyTo()+ " "+ auctionModel.getCreatedAt());
         }
         catch (IOException ex){
