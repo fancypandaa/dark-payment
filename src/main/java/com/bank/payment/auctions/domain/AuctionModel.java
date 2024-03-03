@@ -18,4 +18,6 @@ public class AuctionModel implements Serializable {
     private String currencyType;
     private String currencyTo;
     private String createdAt;
+    private ProcessState processState;
 }
+

@@ -1,6 +1,9 @@
 package com.bank.payment.auctions.subscriber;
 
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -10,11 +13,14 @@ import org.slf4j.LoggerFactory;
 @Component
 public class AuctionBuilder {
     private static final Logger log= LoggerFactory.getLogger(AuctionBuilder.class);
+
+    @Autowired
+    AuctionFactory auctionFactory;
     private static LinkedList<AuctionModel> ll= new LinkedList();
 
     public void createAuction(AuctionModel auctionModel){
         ll.add(auctionModel);
-        AuctionFactory.getAuction(auctionModel);
+        auctionFactory.getOrCreateAuction(auctionModel);
         log.info("Auction List Size::" ,ll.size());
     }
     private AuctionModel findInList(String auctionId){
@@ -31,18 +37,18 @@ public class AuctionBuilder {
         if(auctionModel == null) return;
         this.ll.remove(auctionModel);
         if(voterId.isPresent()){
-            AuctionFactory.closeAuction(auctionModel.getAuctionId(),voterId.get());
+            auctionFactory.closeAuction(auctionModel.getAuctionId(),voterId.get());
         }
         else{
-            AuctionFactory.removeAuction(auctionModel.getAuctionId());
+            auctionFactory.removeAuction(auctionModel.getAuctionId());
         }
      }
     public void extendAuction(String auctionId){
-        AuctionFactory.extendAuction(auctionId);
+        auctionFactory.extendAuction(auctionId);
      }
     public void addVote(String auctionId,String voterId, BigDecimal offer){
         log.info("addVote ",auctionId,voterId);
-        AuctionFactory.addVote(auctionId,voterId,offer);
+        auctionFactory.addVote(auctionId,voterId,offer);
      }
 
 }

@@ -7,7 +7,6 @@ import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import java.util.*;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +29,11 @@ public class AuctionsEventListener implements MessageListener {
             auctionBuilder.createAuction(auctionModel);
             log.info("Message received: " + auctionModel.getCurrentAmount()+ " " + auctionModel.getCurrencyType()
             +" ->> "+ auctionModel.getCurrencyTo()+ " "+ auctionModel.getCreatedAt());
+
         }
         catch (IOException ex){
             ex.printStackTrace();
         }
     }
+
 }
