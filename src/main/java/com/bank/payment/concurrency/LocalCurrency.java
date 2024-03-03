@@ -1,4 +1,4 @@
-package com.bank.payment.concurrencyFactory;
+package com.bank.payment.concurrency;
 
 import com.bank.payment.domain.BalanceTypes;
 
