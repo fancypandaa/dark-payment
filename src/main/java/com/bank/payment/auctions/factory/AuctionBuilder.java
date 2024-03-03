@@ -1,9 +1,8 @@
-package com.bank.payment.auctions.subscriber;
+package com.bank.payment.auctions.factory;
 
-import lombok.extern.java.Log;
+import com.bank.payment.auctions.domain.AuctionForm;
+import com.bank.payment.auctions.domain.AuctionModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,10 +17,12 @@ public class AuctionBuilder {
     AuctionFactory auctionFactory;
     private static LinkedList<AuctionModel> ll= new LinkedList();
 
-    public void createAuction(AuctionModel auctionModel){
+    public AuctionForm createAuction(AuctionModel auctionModel){
         ll.add(auctionModel);
-        auctionFactory.getOrCreateAuction(auctionModel);
-        log.info("Auction List Size::" ,ll.size());
+        AuctionForm auctionForm=auctionFactory.getOrCreateAuction(auctionModel);
+        log.info("Auction List Size:: "+ll.size());
+        log.info("auction form"+auctionForm.toString());
+        return auctionForm;
     }
     private AuctionModel findInList(String auctionId){
         for(int i=0;i<ll.size();i++){
@@ -30,7 +31,6 @@ public class AuctionBuilder {
             }
         }
         return null;
-//        log.warn("convert List into redis soon",null);
     }
     public void closeAuction(String auctionId,Optional<String> voterId){
         AuctionModel auctionModel=findInList(auctionId);

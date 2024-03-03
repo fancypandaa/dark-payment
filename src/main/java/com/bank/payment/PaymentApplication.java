@@ -1,8 +1,7 @@
 package com.bank.payment;
 
-import com.bank.payment.auctions.subscriber.AuctionsEventListener;
-import com.bank.payment.concurrencyFactory.BalanceFactory;
-import com.bank.payment.concurrencyFactory.BalanceOptions;
+import com.bank.payment.concurrency.BalanceFactory;
+import com.bank.payment.concurrency.BalanceOptions;
 import com.bank.payment.config.RsaKeyConfigProperties;
 
 import com.bank.payment.domain.BalanceTypes;

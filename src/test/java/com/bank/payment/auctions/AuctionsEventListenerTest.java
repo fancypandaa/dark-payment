@@ -1,7 +1,7 @@
 package com.bank.payment.auctions;
 
-import com.bank.payment.auctions.subscriber.AuctionModel;
-import com.bank.payment.auctions.subscriber.AuctionsEventListener;
+import com.bank.payment.auctions.domain.AuctionModel;
+import com.bank.payment.auctions.factory.AuctionsEventListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redis.testcontainers.RedisContainer;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,6 @@
-package com.bank.payment.auctions.subscriber;
+package com.bank.payment.auctions.factory;
 
+import com.bank.payment.auctions.domain.AuctionModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
