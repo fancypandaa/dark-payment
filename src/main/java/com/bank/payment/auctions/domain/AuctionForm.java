@@ -1,4 +1,4 @@
-package com.bank.payment.auctions.subscriber;
+package com.bank.payment.auctions.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
