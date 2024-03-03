@@ -1,10 +1,11 @@
-package com.bank.payment.auctions.subscriber;
+package com.bank.payment.auctions.domain;
 
+import com.bank.payment.auctions.factory.ProcessState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.*;
+
 import java.io.Serializable;
 
 @Data
