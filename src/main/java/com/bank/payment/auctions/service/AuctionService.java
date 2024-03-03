@@ -1,6 +1,6 @@
-package com.bank.payment.auctions.publisher;
+package com.bank.payment.auctions.service;
 
-import com.bank.payment.auctions.subscriber.AuctionModel;
+import com.bank.payment.auctions.domain.AuctionModel;
 
 public interface AuctionService {
     Long publish(AuctionModel auctionModel);
