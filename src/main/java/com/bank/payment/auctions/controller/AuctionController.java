@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping(AuctionController.BASE_URL)
 public class AuctionController {
@@ -39,7 +40,6 @@ public class AuctionController {
             @RequestParam("auctionId") String auctionId,
             @RequestParam("offer") BigDecimal offer,
             @RequestParam("userId") String userId
-
     ){
         try {
            log.info("new offer was submitted for "+auctionId);
