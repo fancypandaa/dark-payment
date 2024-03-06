@@ -12,43 +12,28 @@ import org.slf4j.LoggerFactory;
 @Component
 public class AuctionBuilder {
     private static final Logger log= LoggerFactory.getLogger(AuctionBuilder.class);
-
     @Autowired
     AuctionFactory auctionFactory;
-    private static LinkedList<AuctionModel> ll= new LinkedList();
-
     public AuctionForm createAuction(AuctionModel auctionModel){
-        ll.add(auctionModel);
         AuctionForm auctionForm=auctionFactory.getOrCreateAuction(auctionModel);
-        log.info("Auction List Size:: "+ll.size());
         log.info("auction form"+auctionForm.toString());
         return auctionForm;
     }
-    private AuctionModel findInList(String auctionId){
-        for(int i=0;i<ll.size();i++){
-            if(ll.get(i).getAuctionId().equals(auctionId)){
-                return ll.get(i);
-            }
-        }
-        return null;
-    }
     public void closeAuction(String auctionId,Optional<String> voterId){
-        AuctionModel auctionModel=findInList(auctionId);
-        if(auctionModel == null) return;
-        this.ll.remove(auctionModel);
-        if(voterId.isPresent()){
-            auctionFactory.closeAuction(auctionModel.getAuctionId(),voterId.get());
+        AuctionForm auctionForm = auctionFactory.findFormById(auctionId);
+        if(auctionForm == null) return;
+        if(voterId.isPresent() && auctionForm.getBuyers().get(voterId).equals(voterId)){
+            auctionFactory.closeAuction(auctionForm.getAuctionId(),voterId.get());
         }
         else{
-            auctionFactory.removeAuction(auctionModel.getAuctionId());
+            auctionFactory.removeAuction(auctionForm.getAuctionId());
         }
      }
     public void extendAuction(String auctionId){
         auctionFactory.extendAuction(auctionId);
      }
-    public void addVote(String auctionId,String voterId, BigDecimal offer){
-        log.info("addVote ",auctionId,voterId);
+    public void addVote(String auctionId,String voterId, BigDecimal offer) {
+        log.info("addVote "+auctionId+" "+voterId);
         auctionFactory.addVote(auctionId,voterId,offer);
      }
-
 }
