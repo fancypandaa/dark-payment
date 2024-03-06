@@ -26,7 +26,6 @@ public class AuctionsEventListener implements MessageListener {
     public void onMessage(Message message, byte[] pattern) {
         try {
             AuctionModel auctionModel =objectMapper.readValue(message.getBody(),AuctionModel.class);
-            redisTemplate.opsForValue().set(auctionModel.getAuctionId(),auctionModel);
             auctionBuilder.createAuction(auctionModel);
             log.info("Message received: " + auctionModel.getCurrentAmount()+ " " + auctionModel.getCurrencyType()
             +" ->> "+ auctionModel.getCurrencyTo()+ " "+ auctionModel.getCreatedAt());
