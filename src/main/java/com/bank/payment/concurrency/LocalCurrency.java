@@ -21,7 +21,8 @@ public class LocalCurrency extends BalanceFactory {
     }
     @Override
     public BigDecimal calculateInitialCurrencyEquivalent(BigDecimal amount, Double equivalentPrice, BalanceTypes currency) {
-        return null;
+        BigDecimal equivalentAmount = BigDecimal.valueOf(amount.doubleValue()* equivalentPrice);
+        return equivalentAmount;
     }
 
 }
