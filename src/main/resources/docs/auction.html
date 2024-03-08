@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Concurrency class diagram</title>
+
+</head>
+<body>
+<pre class="mermaid">
+    classDiagram
+    AuctionBuilder *-- AuctionFactory
+    AuctionsEventListener *-- AuctionBuilder
+    AuctionsEventListener *-- ObjectMapper
+    AuctionFactory -- ProcessState
+    class AuctionBuilder{
+        +createAuction(auctionModel)
+        +closeAuction( auctionId,voterId)
+        +extendAuction(auctionId)
+        +addVote(auctionId,voterId,offer)
+    }
+    class AuctionFactory{
+        -createNewAuctionForm(auctionModel):AuctionForm
+        +findFormById(auctionId)
+        +getOrCreateAuction(auctionModel)
+        +removeAuction(auctionId)
+        +extendAuction(auctionId)
+        +closeAuction(auctionId,voterId)
+        +addVote(auctionId, voterId, offer)
+    }
+    class AuctionsEventListener{
+        +onMessage(Message message, byte[] pattern)
+    }
+    class ProcessState~enumeration~{
+        RED
+        BLUE
+    }
+</pre>
+
+<script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>

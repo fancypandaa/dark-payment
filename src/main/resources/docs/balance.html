@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Concurrency class diagram</title>
+
+</head>
+<body>
+<pre class="mermaid">
+    classDiagram
+    BalanceOptions *-- BalanceFactory
+    BalanceFactory <|-- Coins
+    BalanceFactory <|-- LocalCurrency
+    BalanceFactory <|-- ForeignCurrency
+
+    class BalanceFactory~abstract~{
+        +double taxPercentage
+        +getAvailableToUseAfterTax(amount) BigDecimal*
+        +calculateInitialCurrencyEquivalent(amount,equivalentPrice,currency)BigDecimal *
+    }
+    class BalanceOptions{
+    createBalance(type,taxPercentage,currencyEquivalent):BalanceFactory
+    }
+    class Coins{
+        +getAvailableToUseAfterTax(amount) BigDecimal*
+        +calculateInitialCurrencyEquivalent(amount,equivalentPrice,currency)BigDecimal *
+    }
+    class LocalCurrency{
+        +getAvailableToUseAfterTax(amount) BigDecimal*
+        +calculateInitialCurrencyEquivalent(amount,equivalentPrice,currency)BigDecimal *
+    }
+    class ForeignCurrency{
+        +getAvailableToUseAfterTax(amount) BigDecimal*
+        +calculateInitialCurrencyEquivalent(amount,equivalentPrice,currency)BigDecimal *
+    }
+
+
+</pre>
+
+<script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
