@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +28,23 @@ public class AuctionController {
             auctionService.publish(auctionModel);
             log.info("new auction model published......",auctionModel.getAuctionId());
             return new ResponseEntity<>("success", HttpStatus.OK);
+        }
+        catch (Exception ex){
+            log.error(ex.getMessage());
+            return new ResponseEntity<>("failed",HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping("/payInsurance/{auctionId}/{userId}")
+    public ResponseEntity<String> payInsurance(@PathVariable String auctionId,@PathVariable String userId){
+        try {
+            boolean paymentState = auctionBuilder.payInsurance(auctionId,userId);
+            log.info("Insurance state for " + auctionId +" and userId "+ userId + " is "+paymentState);
+            if(paymentState){
+                return new ResponseEntity<>("success", HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("failed", HttpStatus.OK);
+            }
         }
         catch (Exception ex){
             log.error(ex.getMessage());
