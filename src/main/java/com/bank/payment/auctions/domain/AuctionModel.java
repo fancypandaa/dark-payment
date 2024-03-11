@@ -1,6 +1,5 @@
 package com.bank.payment.auctions.domain;
 
-import com.bank.payment.auctions.factory.ProcessState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
