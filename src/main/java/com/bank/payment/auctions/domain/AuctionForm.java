@@ -21,6 +21,8 @@ public class AuctionForm implements Serializable {
     private Instant closeAt;
     private String from;
     private String to;
+    private ProcessState processState;
+    private ArrayList<String> votersList= new ArrayList<>();
     private HashMap<String, BigDecimal> buyers= new HashMap<>();
     public AuctionForm addBuyers(String voterId, BigDecimal offer){
         this.buyers.put(voterId,offer);
