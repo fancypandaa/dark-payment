@@ -1,4 +1,4 @@
-package com.bank.payment.auctions.factory;
+package com.bank.payment.auctions.domain;
 
 public enum ProcessState {
     RED,BLUE
