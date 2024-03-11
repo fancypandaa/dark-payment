@@ -2,14 +2,12 @@ package com.bank.payment.auctions.factory;
 
 import com.bank.payment.auctions.domain.AuctionForm;
 import com.bank.payment.auctions.domain.AuctionModel;
+import com.bank.payment.auctions.domain.ProcessState;
 import com.bank.payment.auctions.service.AuctionService;
-import com.bank.payment.concurrency.BalanceFactory;
 import com.bank.payment.concurrency.BalanceOptions;
-import com.bank.payment.domain.BalanceTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -19,8 +17,6 @@ import java.time.Instant;
 
 @Component
 public class AuctionFactory {
-
-
     private static final Logger logger= LoggerFactory.getLogger(AuctionFactory.class);
     BalanceOptions balanceOptions;
     @Autowired
@@ -29,26 +25,6 @@ public class AuctionFactory {
     public AuctionFactory() {
         balanceOptions = new BalanceOptions();
     }
-
-
-    private AuctionForm createNewAuctionForm(AuctionModel auctionModel){
-
-        BalanceFactory balanceFactory=balanceOptions.createBalance(BalanceTypes.LOCAL_CURRENCY.type,0.17, BalanceTypes.FOREIGN_CURRENCY);
-        AuctionForm auctionForm= new AuctionForm();
-        auctionForm.setAuctionId(auctionModel.getAuctionId());
-        auctionForm.setState("open");
-        auctionForm.setFrom(auctionModel.getCurrencyType());
-        auctionForm.setTo(auctionModel.getCurrencyTo());
-        auctionForm.setCost(10.0);
-        auctionForm.setOpenAt(Instant.now());
-        auctionForm.setCloseAt(auctionForm.getOpenAt().plus(30, ChronoUnit.MINUTES));
-        BigDecimal openingAmount=balanceFactory.calculateInitialCurrencyEquivalent(
-                BigDecimal.valueOf(auctionModel.getCurrentAmount()),0.5,BalanceTypes.FOREIGN_CURRENCY);
-        logger.info("OpeninngPrice "+auctionModel.getCurrentAmount());
-        auctionForm.setOpeningPrice(openingAmount);
-        return auctionForm;
-    }
-
     public AuctionForm findFormById(String auctionId){
         Optional<AuctionForm> optionalAuctionForm = Optional.of(auctionService.getAuctionForm(auctionId));
         if(optionalAuctionForm.isEmpty()){
@@ -59,8 +35,9 @@ public class AuctionFactory {
     public AuctionForm getOrCreateAuction(AuctionModel auctionModel){
         Optional<AuctionForm> result = Optional.ofNullable(auctionService.getAuctionForm(auctionModel.getAuctionId()));
         if(result.isEmpty()){
-            AuctionForm auctionForm=createNewAuctionForm(auctionModel);
+            AuctionForm auctionForm=AuctionOperations.createNewAuctionForm(balanceOptions,auctionModel);
             auctionService.putAuctionForm(auctionForm.getAuctionId(), auctionForm);
+            auctionService.setExpireTime(auctionForm.getAuctionId(),auctionForm.getCloseAt());
             result= Optional.of(auctionForm);
         }
 //        logger.info("MAP SIZE::");
@@ -84,6 +61,8 @@ public class AuctionFactory {
         auctionForm.setCost(auctionForm.getCost()*2);
         auctionForm.setCloseAt(auctionForm.getCloseAt().plus(30,ChronoUnit.MINUTES));
         auctionForm.setState("extra");
+        auctionService.putAuctionForm(auctionId,auctionForm);
+        auctionService.setExpireTime(auctionId,auctionForm.getCloseAt());
         logger.info("Auction Extended successfully, wish you luck!!!"+ auctionForm.toString());
     }
     public void addVote(String auctionId,String voterId, BigDecimal offer)  {
@@ -94,6 +73,9 @@ public class AuctionFactory {
         }
         logger.info(optionalAuctionForm.get().toString());
         AuctionForm auctionForm=optionalAuctionForm.get();
+        if(!AuctionOperations.checkUserInsurance(auctionForm.getVotersList(),voterId)){
+            return;
+        }
         if(auctionForm.getBuyers().get(voterId) !=null){
             auctionForm.getBuyers().put(voterId,offer);
             logger.info("exist voter submit new offer "+auctionForm.toString());
@@ -107,17 +89,33 @@ public class AuctionFactory {
         }
         auctionService.putAuctionForm(auctionId,auctionForm);
     }
-
     /// worker solution .........??????? new branch full
-    public BigDecimal closeAuction(String auctionId,String voterId){
+    public BigDecimal acceptOffer(String auctionId,String voterId){
         Optional<AuctionForm> optionalAuctionForm = Optional.ofNullable(auctionService.getAuctionForm(auctionId));
         if(!optionalAuctionForm.isPresent()){
             logger.info("Auction with ID: "+ auctionId+" has been already gone...");
             return null;
         }
         AuctionForm auctionForm= optionalAuctionForm.get();
+        if(auctionForm.getProcessState() == ProcessState.RED){
+//            3rd party transaction through paypal
+        }
+        else{
+//            cash without tax
+
+        }
         auctionForm.setCloseAt(Instant.now());
-        auctionForm.setCost(auctionForm.getCost()+10);// just now static
         return auctionForm.getBuyers().get(voterId);
+    }
+    public void payAuctionInsurance(String auctionId,String voterId){
+        Optional<AuctionForm> optionalAuctionForm = Optional.ofNullable(auctionService.getAuctionForm(auctionId));
+//        3rd party payment method
+        if(!optionalAuctionForm.isPresent()){
+            logger.info("Auction with ID: "+ auctionId+" has been already gone...");
+            return;
+        }
+        AuctionForm auctionForm= optionalAuctionForm.get();
+        auctionForm.getVotersList().add(voterId);
+        auctionService.putAuctionForm(auctionId,auctionForm);
     }
 }

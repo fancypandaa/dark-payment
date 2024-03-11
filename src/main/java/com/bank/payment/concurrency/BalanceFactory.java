@@ -12,7 +12,6 @@ abstract public class BalanceFactory {
     public abstract BigDecimal getAvailableToUseAfterTax(BigDecimal amount);
 
     public abstract BigDecimal calculateInitialCurrencyEquivalent(BigDecimal amount, Double equivalentPrice,BalanceTypes currency);
-
     @Override
     public String toString() {
         StringBuffer display = new StringBuffer();

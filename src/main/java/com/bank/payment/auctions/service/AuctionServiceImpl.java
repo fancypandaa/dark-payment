@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -43,6 +44,16 @@ public class AuctionServiceImpl implements AuctionService{
     public void putAuctionForm(String auctionId,AuctionForm auctionForm) {
         try {
             redisTemplate.opsForHash().put(auctionId,AuctionForm.class.getFields(),auctionForm);
+        }
+        catch (RuntimeException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setExpireTime(String key, Instant date) {
+        try {
+            redisTemplate.expireAt(key,date);
         }
         catch (RuntimeException ex){
             ex.printStackTrace();
