@@ -5,7 +5,9 @@ import com.bank.payment.auctions.domain.AuctionModel;
 import com.bank.payment.auctions.domain.ProcessState;
 import com.bank.payment.concurrency.BalanceFactory;
 import com.bank.payment.concurrency.BalanceOptions;
+import com.bank.payment.domain.AuctionLogs;
 import com.bank.payment.domain.BalanceTypes;
+import com.bank.payment.dto.model.AuctionLogsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +49,20 @@ public class AuctionOperations {
             return true;
         }
         return false;
+    }
+    protected static AuctionLogsDTO createAuctionsLog(AuctionForm auctionForm,String voterId){
+        AuctionLogsDTO auctionLogsDTO = new AuctionLogsDTO();
+        auctionLogsDTO.setAuctionId(auctionForm.getAuctionId());
+        auctionLogsDTO.setCost(auctionForm.getCost());
+        auctionLogsDTO.setFrom(auctionForm.getFrom());
+        auctionLogsDTO.setTo(auctionForm.getTo());
+        auctionLogsDTO.setVoted(auctionForm.getVoted());
+        auctionLogsDTO.setCloseAt(auctionForm.getCloseAt());
+        auctionLogsDTO.setOpeningPrice(auctionForm.getOpeningPrice());
+        auctionLogsDTO.setState(auctionForm.getState());
+        auctionLogsDTO.setProcessState(auctionForm.getProcessState());
+        auctionLogsDTO.setBuyer(voterId);
+        return auctionLogsDTO;
     }
 
 }

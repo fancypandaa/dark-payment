@@ -5,6 +5,8 @@ import com.bank.payment.auctions.domain.AuctionModel;
 import com.bank.payment.auctions.domain.ProcessState;
 import com.bank.payment.auctions.service.AuctionService;
 import com.bank.payment.concurrency.BalanceOptions;
+import com.bank.payment.dto.model.AuctionLogsDTO;
+import com.bank.payment.service.AuctionLogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +20,16 @@ import java.time.Instant;
 @Component
 public class AuctionFactory {
     private static final Logger logger= LoggerFactory.getLogger(AuctionFactory.class);
-    BalanceOptions balanceOptions;
-    @Autowired
-    AuctionService auctionService;
+    private final BalanceOptions balanceOptions;
+    private final AuctionLogsService auctionLogsService;
+    private final AuctionService auctionService;
 
-    public AuctionFactory() {
-        balanceOptions = new BalanceOptions();
+    public AuctionFactory(BalanceOptions balanceOptions, AuctionLogsService auctionLogsService, AuctionService auctionService) {
+        this.balanceOptions = balanceOptions;
+        this.auctionLogsService = auctionLogsService;
+        this.auctionService = auctionService;
     }
+
     public AuctionForm findFormById(String auctionId){
         Optional<AuctionForm> optionalAuctionForm = Optional.of(auctionService.getAuctionForm(auctionId));
         if(optionalAuctionForm.isEmpty()){
@@ -105,6 +110,8 @@ public class AuctionFactory {
 
         }
         auctionForm.setCloseAt(Instant.now());
+        AuctionLogsDTO auctionLogsDTO = AuctionOperations.createAuctionsLog(auctionForm,voterId);
+        auctionLogsService.createNewAuctionLog(auctionLogsDTO);
         return auctionForm.getBuyers().get(voterId);
     }
     public void payAuctionInsurance(String auctionId,String voterId){
@@ -115,6 +122,8 @@ public class AuctionFactory {
             return;
         }
         AuctionForm auctionForm= optionalAuctionForm.get();
+        BigDecimal price = AuctionOperations.getInsurancePrice(auctionForm.getOpeningPrice());
+        logger.info("voter submit insurance price successfully"+price);
         auctionForm.getVotersList().add(voterId);
         auctionService.putAuctionForm(auctionId,auctionForm);
     }

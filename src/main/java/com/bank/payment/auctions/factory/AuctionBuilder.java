@@ -35,7 +35,7 @@ public class AuctionBuilder {
      }
     public boolean payInsurance(String auctionId,String userId){
 //      need 3rd party for this operation
-
+        auctionFactory.payAuctionInsurance(auctionId,userId);
         log.info("Show insurance state for specific Auction");
         return true;
     }
