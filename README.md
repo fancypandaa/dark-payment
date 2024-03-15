@@ -17,7 +17,7 @@ Dark payment will manage your auction to guarantee you get the best offer for yo
 
 Architecture
 -----------
-![](https://github.com/fancypandaa/dark-payment/src/main/resources/docs/auction.drawio.png)
+![alt text] (https://github.com/fancypandaa/dark-payment/blob/main/src/main/resources/docs/auction.drawio.png)
 
 
 How to use it
